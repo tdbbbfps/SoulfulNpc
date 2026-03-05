@@ -1,3 +1,10 @@
+---
+title: "Soulful NPC"
+author: "tdbbb"
+date: "2026-03-05"
+geometry: margin=2cm
+---
+
 # Soulful NPC
 
 ![Icon](icon.svg)
@@ -12,9 +19,9 @@
 
 ## Project Overview
 
-**Soulful NPC** explores how LLM models and RAG can be integrated into a game to create more immersive NPC interactions. Rather than relying on scripted dialogue trees, NPCs retrieve relevant knowledge from a local vector database and generate contextual responses real-time.
+**Soulful NPC** is a project built for learning how LLM and RAG can be integrated into game to create more immersive NPC interactions. Not relying on scripted dialogue trees or routes. NPCs retrieve relevant knowledge from a local vector database then generate responses to player.
 
-This project serves as a learning sandbox for building a full RAG pipeline, connecting a game engine to a local backend service, and designing a system that keeps all data and computation on local devices.
+This project serves as a learning sandbox for building a full RAG pipeline, connecting game to local backend service, and designing a system that keeps all data and computation on local.
 
 ---
 
@@ -56,6 +63,13 @@ Godot (Player Input)
   → Godot (Display Response)
 ```
 
+The core of the interaction lies in similarity search within the vector space. Given a query vector $q$ and a document vector $d$, the system calculates:
+
+$$score = \frac{q \cdot d}{|q| |d|}$$
+
+The top-k results are then injected into the LLM system prompt as `context`.
+
+**Here's the system diagram:**
 ```mermaid
 flowchart LR
     subgraph CLIENT["CLIENT — Godot Engine"]
@@ -204,13 +218,12 @@ You can configure the following in `backend/config.py` (or via environment varia
     - [ ] Similarity Search
     - [ ] Prompt Template Construction
 
-## Future Improvements
+## Future Goals
 
-- [ ] Support multiple NPCs with isolated knowledge bases
-- [ ] Add memory / conversation history per NPC
-- [ ] Emotion/mood system influencing LLM system prompt
-- [ ] In-game tool for hot-reloading the knowledge base
-- [ ] Expand to 3D with Godot's 3D scene support
+- [ ] Support multiple NPCs with isolated knowledge bases.
+- [ ] Add memory / conversation history.
+- [ ] Emotion / mood system influencing how NPC will response.
+- [ ] In-game tool for hot-reloading the knowledge base.
 
 ---
 
@@ -219,6 +232,8 @@ You can configure the following in `backend/config.py` (or via environment varia
 This project is licensed under the [MIT License](LICENSE).
 
 ---
+
+## Others
 
 > [!CAUTION]
 > This project is for learning and experimentation purposes.
@@ -230,6 +245,5 @@ This project is licensed under the [MIT License](LICENSE).
 ```python
 @app.get("/health")
 async def health() -> dict:
-  return {"message": "Still working."}
+  return {"message": "Still alive."}
 ```
-
