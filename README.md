@@ -2,6 +2,10 @@
 
 > A 2D game prototype where NPCs are powered by local LLM and Retrieval-Augmented Generation (RAG), enabling dynamic, context-aware dialogues completely local.
 
+> [!NOTE]
+> This is a experimental project.
+> If you encounter any problems, please try to solve them yourself.
+
 ---
 
 ## Project Overview
@@ -108,21 +112,21 @@ soulful-npc/
 
 ---
 
-## Installation
+## Get started
 
-#### Requirements
+### Requirements
 
 - [Python 3.11+](https://www.python.org/)
 - [Godot Engine 4.x+](https://godotengine.org/)
 - [Ollama](https://ollama.com/)
 
-#### Steps
+### Installation
 
 1. **Clone the repository**
    
    ```bash
    git clone https://github.com/tdbbbfps/SoulfulNpc.git
-   cd soulful-npc
+   cd SoulfulNpc
    ```
 
 2. **Install Python dependencies**
@@ -130,10 +134,15 @@ soulful-npc/
    ```bash
    pip install -r requirements.txt
    ```
+  > [!TIP]
+  > use uv sync if you are using uv to manage your python environment.
 
 3. **Open and run the Godot project**
    
    Open project in Godot Editor and run main.tscn to start.
+
+   > [!NOTE]
+   > TODO: Export the game.
 
 ---
 
@@ -150,19 +159,63 @@ You can configure the following in `backend/config.py` (or via environment varia
 
 ---
 
+## Current Progress
+
+- [ ] **Game Client (Godot)**
+  - [ ] Player Controller
+    - [ ] Components
+      - [ ] Movement
+      - [ ] Input Handler
+      - [ ] Animation Handler
+    - [ ] Finite State Machine
+  - [ ] NPC
+    - [ ] Interaction
+  - [ ] Interaction System
+    - [ ] Interaction Manager
+    - [ ] Interactable Area
+    - [ ] Interaction Menu
+  - [ ] Dialogue System (using addons)
+  - [ ] UI System (Dialogue Box, Chat Input)
+    - [ ] Character Art and Name Display
+    - [ ] Dialogue Box
+    - [ ] Chat Input
+  - [ ] WebSocket Client
+- [ ] **Python Backend**
+  - [ ] FastAPI Server Setup
+    - [ ] App initialization
+    - [ ] Configuration loading
+  - [ ] WebSocket Endpoint
+    - [ ] Connection Manager
+    - [ ] Bidirectional messaging
+  - [ ] Ollama
+  - [ ] NPCs' Memories (Chat History)
+- [ ] **RAG Pipeline**
+  - [ ] Vector Database (ChromaDB)
+    - [ ] Client setup & Persistence
+  - [ ] Document Ingestion & Embedding
+    - [ ] Document Loader
+    - [ ] Text Chunking
+    - [ ] Embedding Generation
+  - [ ] Retrieval
+    - [ ] Similarity Search
+    - [ ] Prompt Template Construction
+
 ## Future Improvements
 
 - [ ] Support multiple NPCs with isolated knowledge bases
 - [ ] Add memory / conversation history per NPC
 - [ ] Emotion/mood system influencing LLM system prompt
 - [ ] In-game tool for hot-reloading the knowledge base
-- [ ] Streaming LLM responses for more natural dialogue pacing
 - [ ] Expand to 3D with Godot's 3D scene support
 
 ---
 
 ## License
 
-MIT License.
+This project is licensed under the MIT License.
 
-This project is for learning and experimentation purposes.
+---
+
+> [!NOTE]
+> This project is for learning and experimentation purposes.
+
