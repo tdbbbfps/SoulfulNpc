@@ -11,7 +11,7 @@ geometry: margin=2cm
 
 > A 2D game prototype where NPCs are powered by local LLM and Retrieval-Augmented Generation (RAG), enabling dynamic, context-aware dialogues completely local.
 
-> [!NOTE]
+> [!WARNING]
 > This is a experimental project.
 > If you encounter any problems, please try to solve them yourself.
 
