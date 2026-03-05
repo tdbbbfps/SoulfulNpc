@@ -1,32 +1,54 @@
 # Soulful NPC
 
-Soulful NPC is a prototype of a 2D game where NPCs are powered by local LLM and Retrieval-Augmented Generation.
+> A 2D game prototype where NPCs are powered by local LLM and Retrieval-Augmented Generation (RAG), enabling dynamic, context-aware dialogues completely local.
+
+---
 
 ## Project Overview
 
-Soulful NPC's main goal is to learn how to create a unique gaming experience by integrating local large language model with retrieval-augmented generation technique.
+**Soulful NPC** explores how LLM models and RAG can be integrated into a game to create more immersive NPC interactions. Rather than relying on scripted dialogue trees, NPCs retrieve relevant knowledge from a local vector database and generate contextual responses real-time.
 
-## Project Feature
+This project serves as a learning sandbox for building a full RAG pipeline, connecting a game engine to a local backend service, and designing a system that keeps all data and computation on local devices.
 
-- Dynamic NPC Dialogues: NPC generate response based on player's interaction, own knowledge, system prompt.
-- Customizable Knowledge Base: Easily update the npc's and lore's knowledge base.
-- All in local: All data, logics and interactions handled in local.
+---
+
+## Features
+
+- **Dynamic NPC Dialogues** — NPCs generate responses based on player input, their own knowledge base, and a customizable system prompt.
+- **Retrieval-Augmented Generation** — Each player query is vectorized and used to retrieve relevant context from a local vector database before being passed to the LLM.
+- **Customizable Knowledge Base** — NPC personality data and world lore can be updated independently via the vector database without modifying game logic.
+- **Fully Local** — All data, logic, and inference run on-device. No internet connection or external API is required.
+- **Real-time Communication** — Bidirectional WebSocket connection between Godot and the Python backend enables low-latency, continuous dialogue.
+
+---
 
 ## Tech Stack
 
-- Godot Engine 4.6: Using WebSocket to connect to ai 
-- Python:
-    - FastAPI: Hosting backend service in local and handling data transferation.
-    - WebSocket: Create a bidirectional, real-time, continuous communication channel between Godot and Python.
-    - LangChain: Handling context chunking, embedding, RAG logics.
-    - Ollama: Running llm model locally.
-- Database: ChromaDB.
+| Layer           | Technology       | Purpose                                      |
+| --------------- | ---------------- | -------------------------------------------- |
+| Game Client     | Godot Engine 4.x | Player interaction, UI, WebSocket client     |
+| Backend         | Python + FastAPI | REST/WebSocket server, request routing       |
+| Communication   | WebSocket        | Real-time bidirectional messaging            |
+| RAG Framework   | LangChain        | Text chunking, embedding, retrieval pipeline |
+| Vector Database | ChromaDB         | Local vector storage and similarity search   |
+| LLM Runtime     | Ollama           | Running LLMs locally (e.g. Llama 3, Mistral) |
 
-## Workflow:
+---
 
-Create a bidirectional communication channel between Godot and Python.
+## System Architecture
 
-Godot (Player input) --> Python Backend (Receive input) --> Embedding (Query vectorization) --> Retrieval (Retrieve vector database) --> Augmentation (Prompt construction)--> LLM (Generate response) --> Python Backend (Response) --> Godot (Receive response)
+The system follows a request-response cycle initiated by the player:
+
+```
+Godot (Player Input)
+  → Python Backend (Receive Input)
+    → Embedding (Query Vectorization)
+      → Retrieval (Vector Database Lookup)
+        → Augmentation (Prompt Construction)
+          → LLM (Generate Response)
+        → Python Backend (Format Response)
+  → Godot (Display Response)
+```
 
 ```mermaid
 flowchart LR
@@ -56,7 +78,7 @@ flowchart LR
     A -->|Send input| B
     B -->|Raw query| C
     E -->|Augmented prompt| F
-    F -->|Generate response| G
+    F -->|Generated text| G
     G -->|Receive response| H
 
     style CLIENT fill:#1a1a2e,stroke:#4cc9f0,color:#e0e0ff
@@ -64,3 +86,83 @@ flowchart LR
     style RAG fill:#0f3460,stroke:#4cc9f0,color:#e0e0ff
     style LLM_BLOCK fill:#1a1a2e,stroke:#7209b7,color:#e0e0ff
 ```
+
+---
+
+## Project Structure
+
+> Template
+
+```
+soulful-npc/
+├── godot/                  # Godot project files
+│   ├── scenes/             # Game scenes
+│   └── scripts/            # GDScript files (WebSocket client, UI logic)
+├── backend/                # Python backend
+│   ├── main.py             # FastAPI entry point
+│   ├── rag/                # RAG pipeline (embedding, retrieval, augmentation)
+│   └── knowledge_base/     # Source documents for vector ingestion
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## Installation
+
+#### Requirements
+
+- [Python 3.11+](https://www.python.org/)
+- [Godot Engine 4.x+](https://godotengine.org/)
+- [Ollama](https://ollama.com/)
+
+#### Steps
+
+1. **Clone the repository**
+   
+   ```bash
+   git clone https://github.com/tdbbbfps/SoulfulNpc.git
+   cd soulful-npc
+   ```
+
+2. **Install Python dependencies**
+   
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Open and run the Godot project**
+   
+   Open project in Godot Editor and run main.tscn to start.
+
+---
+
+## Configuration
+
+You can configure the following in `backend/config.py` (or via environment variables):
+
+| Variable         | Default       | Description                             |
+| ---------------- | ------------- | --------------------------------------- |
+| `OLLAMA_MODEL`   | `llama3`      | The local LLM model to use via Ollama   |
+| `CHROMA_DB_PATH` | `./chroma_db` | Path to the ChromaDB persistent storage |
+| `WEBSOCKET_PORT` | `8765`        | Port for the WebSocket server           |
+| `CHUNK_SIZE`     | `500`         | Token chunk size for document ingestion |
+
+---
+
+## Future Improvements
+
+- [ ] Support multiple NPCs with isolated knowledge bases
+- [ ] Add memory / conversation history per NPC
+- [ ] Emotion/mood system influencing LLM system prompt
+- [ ] In-game tool for hot-reloading the knowledge base
+- [ ] Streaming LLM responses for more natural dialogue pacing
+- [ ] Expand to 3D with Godot's 3D scene support
+
+---
+
+## License
+
+MIT License.
+
+This project is for learning and experimentation purposes.
