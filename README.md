@@ -1,5 +1,7 @@
 # Soulful NPC
 
+![Icon](icon.svg)
+
 > A 2D game prototype where NPCs are powered by local LLM and Retrieval-Augmented Generation (RAG), enabling dynamic, context-aware dialogues completely local.
 
 > [!NOTE]
@@ -116,9 +118,9 @@ soulful-npc/
 
 ### Requirements
 
-- [Python 3.11+](https://www.python.org/)
-- [Godot Engine 4.x+](https://godotengine.org/)
-- [Ollama](https://ollama.com/)
+- Download [Python 3.11+](https://www.python.org/).
+- Download [Godot Engine 4.x+](https://godotengine.org/) editor.
+- Download [Ollama](https://ollama.com/) app.
 
 ### Installation
 
@@ -135,14 +137,16 @@ soulful-npc/
    pip install -r requirements.txt
    ```
   > [!TIP]
-  > use uv sync if you are using uv to manage your python environment.
+  > If you are using uv, use the following command.
+  > ```bash
+  > uv sync
+  > ```
 
 3. **Open and run the Godot project**
    
    Open project in Godot Editor and run main.tscn to start.
-
-   > [!NOTE]
-   > TODO: Export the game.
+  > [!NOTE]
+  > TODO: Export the game.
 
 ---
 
@@ -212,10 +216,20 @@ You can configure the following in `backend/config.py` (or via environment varia
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-> [!NOTE]
+> [!CAUTION]
 > This project is for learning and experimentation purposes.
+> 
+> *I don't know when I can finish this project.*
+> 
+> ~~I'll probably do a little bit and then abandon it.~~
+
+```python
+@app.get("/health")
+async def health() -> dict:
+  return {"message": "Still working."}
+```
 
