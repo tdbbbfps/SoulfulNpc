@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ccucl0wt78ikh"]
+
+[ext_resource type="Script" uid="uid://1gthfitjuqh2" path="res://godot/game/game.gd" id="1_ghlnb"]
+
+[node name="Game" type="Node2D" unique_id=980960020]
+script = ExtResource("1_ghlnb")
