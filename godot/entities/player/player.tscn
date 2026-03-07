@@ -1,0 +1,147 @@
+[gd_scene format=3 uid="uid://b8kkelxr8vf14"]
+
+[ext_resource type="Script" uid="uid://cppl7o0w68827" path="res://godot/entities/player/player.gd" id="1_76jfb"]
+[ext_resource type="Texture2D" uid="uid://ywpkgnqsyuiv" path="res://godot/assets/Pixelart Grasslands/CharacterSheet.png" id="2_2csrr"]
+[ext_resource type="Script" uid="uid://c1niggh8g0x7i" path="res://godot/entities/fsm/fsm.gd" id="3_hvmjt"]
+[ext_resource type="Script" uid="uid://bngqpseks41h5" path="res://godot/entities/player/input_handler.gd" id="3_uryqo"]
+[ext_resource type="Script" uid="uid://gin8ixsch8jj" path="res://godot/entities/player/states/idle.gd" id="4_m2dc2"]
+[ext_resource type="Script" uid="uid://dptsbytwt4r2n" path="res://godot/entities/player/states/run.gd" id="4_o5s1v"]
+[ext_resource type="Script" uid="uid://c3wldonmwl2v8" path="res://godot/entities/components/movement_component.gd" id="4_ywjvk"]
+[ext_resource type="Script" uid="uid://cewo1q8e03184" path="res://godot/entities/player/states/jump.gd" id="5_o5s1v"]
+[ext_resource type="Script" uid="uid://i8v0ivq0qx5i" path="res://godot/entities/player/states/fall.gd" id="6_f6phm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hvmjt"]
+atlas = ExtResource("2_2csrr")
+region = Rect2(16, 160, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2dc2"]
+atlas = ExtResource("2_2csrr")
+region = Rect2(0, 96, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5s1v"]
+atlas = ExtResource("2_2csrr")
+region = Rect2(0, 160, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6phm"]
+atlas = ExtResource("2_2csrr")
+region = Rect2(0, 128, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evft8"]
+atlas = ExtResource("2_2csrr")
+region = Rect2(16, 128, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uryqo"]
+atlas = ExtResource("2_2csrr")
+region = Rect2(32, 128, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ywjvk"]
+atlas = ExtResource("2_2csrr")
+region = Rect2(48, 128, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fefsu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hvmjt")
+}],
+"loop": false,
+"name": &"fall",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2dc2")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5s1v")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f6phm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evft8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uryqo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ywjvk")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2csrr"]
+size = Vector2(8, 16)
+
+[node name="Player" type="CharacterBody2D" unique_id=1420182303 node_paths=PackedStringArray("fsm")]
+collision_layer = 2
+collision_mask = 17
+script = ExtResource("1_76jfb")
+fsm = NodePath("FSM")
+
+[node name="Body" type="Node2D" parent="." unique_id=733996713]
+
+[node name="Anisprite" type="AnimatedSprite2D" parent="Body" unique_id=1354811594]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_fefsu")
+animation = &"run"
+frame = 3
+frame_progress = 0.042199418
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1633978318]
+shape = SubResource("RectangleShape2D_2csrr")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=226536150]
+limit_left = 0
+limit_top = -240
+limit_bottom = 0
+
+[node name="InputHandler" type="Node" parent="." unique_id=1069349360 node_paths=PackedStringArray("actor", "movement_component")]
+script = ExtResource("3_uryqo")
+actor = NodePath("..")
+movement_component = NodePath("../MovementComponent")
+
+[node name="MovementComponent" type="Node" parent="." unique_id=1473362272 node_paths=PackedStringArray("actor", "body")]
+script = ExtResource("4_ywjvk")
+actor = NodePath("..")
+body = NodePath("../Body")
+
+[node name="FSM" type="Node" parent="." unique_id=2055274547 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_hvmjt")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="FSM" unique_id=500299489 node_paths=PackedStringArray("actor", "anisprite")]
+script = ExtResource("4_m2dc2")
+actor = NodePath("../..")
+anisprite = NodePath("../../Body/Anisprite")
+metadata/_custom_type_script = "uid://satplul4h5qp"
+
+[node name="Run" type="Node" parent="FSM" unique_id=826853325 node_paths=PackedStringArray("actor", "anisprite")]
+script = ExtResource("4_o5s1v")
+actor = NodePath("../..")
+anisprite = NodePath("../../Body/Anisprite")
+metadata/_custom_type_script = "uid://satplul4h5qp"
+
+[node name="Jump" type="Node" parent="FSM" unique_id=689911943 node_paths=PackedStringArray("actor", "anisprite")]
+script = ExtResource("5_o5s1v")
+actor = NodePath("../..")
+anisprite = NodePath("../../Body/Anisprite")
+metadata/_custom_type_script = "uid://satplul4h5qp"
+
+[node name="Fall" type="Node" parent="FSM" unique_id=649900316 node_paths=PackedStringArray("actor", "anisprite")]
+script = ExtResource("6_f6phm")
+actor = NodePath("../..")
+anisprite = NodePath("../../Body/Anisprite")
+metadata/_custom_type_script = "uid://satplul4h5qp"
