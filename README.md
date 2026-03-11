@@ -27,11 +27,11 @@ This project serves as a learning sandbox for building a full RAG pipeline, conn
 
 ## Features
 
-- **Dynamic NPC Dialogues** — NPCs generate responses based on player input, their own knowledge base, and a customizable system prompt.
-- **Retrieval-Augmented Generation** — Each player query is vectorized and used to retrieve relevant context from a local vector database before being passed to the LLM.
-- **Customizable Knowledge Base** — NPC personality data and world lore can be updated independently via the vector database without modifying game logic.
+- **Dynamic NPC Dialogues**：NPCs generate responses based on player input, their own knowledge base, and a customizable system prompt.
+- **Retrieval-Augmented Generation**：Each player query is vectorized and used to retrieve relevant context from a local vector database before being passed to the LLM.
+- **Customizable Knowledge Base**：NPC personality data and world lore can be updated independently via the vector database without modifying game logic.
 - **Fully Local** — All data, logic, and inference run on-device. No internet connection or external API is required.
-- **Real-time Communication** — Bidirectional WebSocket connection between Godot and the Python backend enables low-latency, continuous dialogue.
+- **Real-time Communication**：Bidirectional WebSocket connection between Godot and the Python backend enables low-latency, continuous dialogue.
 
 ---
 
