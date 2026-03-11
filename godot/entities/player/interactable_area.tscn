@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cdcb1bqbr26jq"]
+
+[ext_resource type="Script" uid="uid://b4y7sueea0nhq" path="res://godot/entities/player/interactable_area.gd" id="1_1wx7d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ywjvk"]
+size = Vector2(32, 24)
+
+[node name="InteractableArea" type="Area2D" unique_id=148901552]
+collision_layer = 32
+collision_mask = 32
+script = ExtResource("1_1wx7d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=294376261]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_ywjvk")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

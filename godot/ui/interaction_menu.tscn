@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://80aev7cvh8rv"]
+
+[ext_resource type="Script" uid="uid://c6t2fsld6lawu" path="res://godot/ui/interaction_menu.gd" id="1_wse0k"]
+
+[node name="InteractionMenu" type="CanvasLayer" unique_id=952123907 node_paths=PackedStringArray("menu")]
+script = ExtResource("1_wse0k")
+menu = NodePath("Menu")
+
+[node name="Menu" type="Control" parent="." unique_id=1015088661]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="InteractionContainer" type="PanelContainer" parent="Menu" unique_id=1397545881]
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 40.0
+
+[node name="ChatButton" type="Button" parent="Menu/InteractionContainer" unique_id=2139917272]
+layout_mode = 2
+text = "CHAT"
