@@ -55,11 +55,11 @@ The system follows a request-response cycle initiated by the player:
 ```
 Godot (Player Input)
   → Python Backend (Receive Input)
-    → Embedding (Query Vectorization)
-      → Retrieval (Vector Database Lookup)
-        → Augmentation (Prompt Construction)
-          → LLM (Generate Response)
-        → Python Backend (Format Response)
+	→ Embedding (Query Vectorization)
+	  → Retrieval (Vector Database Lookup)
+		→ Augmentation (Prompt Construction)
+		  → LLM (Generate Response)
+		→ Python Backend (Format Response)
   → Godot (Display Response)
 ```
 
@@ -209,14 +209,14 @@ You can configure the following in `backend/config.py` (or via environment varia
   - [ ] NPCs' Memories (Chat History)
 - [ ] **RAG Pipeline**
   - [ ] Vector Database (ChromaDB)
-    - [ ] Client setup & Persistence
+	- [ ] Client setup & Persistence
   - [ ] Document Ingestion & Embedding
-    - [ ] Document Loader
-    - [ ] Text Chunking
-    - [ ] Embedding Generation
+	- [ ] Document Loader
+	- [ ] Text Chunking
+	- [ ] Embedding Generation
   - [ ] Retrieval
-    - [ ] Similarity Search
-    - [ ] Prompt Template Construction
+	- [ ] Similarity Search
+	- [ ] Prompt Template Construction
 
 ## Future Goals
 
