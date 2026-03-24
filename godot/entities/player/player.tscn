@@ -110,10 +110,11 @@ limit_left = 0
 limit_top = -240
 limit_bottom = 0
 
-[node name="InputHandler" type="Node" parent="." unique_id=1069349360 node_paths=PackedStringArray("actor", "movement_component")]
+[node name="InputHandler" type="Node" parent="." unique_id=1069349360 node_paths=PackedStringArray("actor", "movement_component", "interactable_area")]
 script = ExtResource("3_uryqo")
 actor = NodePath("..")
 movement_component = NodePath("../MovementComponent")
+interactable_area = NodePath("../InteractableArea")
 
 [node name="MovementComponent" type="Node" parent="." unique_id=1473362272 node_paths=PackedStringArray("actor", "body")]
 script = ExtResource("4_ywjvk")

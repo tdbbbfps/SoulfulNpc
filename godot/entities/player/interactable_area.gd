@@ -7,10 +7,12 @@ var current_index : int = 0:
 	set(value):
 		current_index = clamp(value, 0, current_interactable.size() - 1)
 
+func can_interact() -> bool:
+	return current_interactable.size() > 0
+
 func _on_body_entered(body: Node2D) -> void:
 	if body is Character and not body in current_interactable:
 		current_interactable.append(body)
-
 
 func _on_body_exited(body: Node2D) -> void:
 	if body is Character and body in current_interactable:
