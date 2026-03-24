@@ -2,6 +2,7 @@ extends Node
 
 @export var actor : CharacterBody2D
 @export var movement_component : MovementComponent
+@export var interactable_area : Area2D
 
 func _physics_process(delta: float) -> void:
 	var dir : float = Input.get_axis("left", "right")
@@ -16,3 +17,5 @@ func _input(event: InputEvent) -> void:
 		movement_component.toggle_dropdown(false)
 	if Input.is_action_just_released("drop_down"):
 		movement_component.toggle_dropdown(true)
+	if Input.is_action_just_pressed("interact"):
+		pass
